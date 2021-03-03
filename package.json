@@ -1,0 +1,28 @@
+{
+  "name": "Masterclass-Knex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/obamis/Masterclass-Knex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/obamis/Masterclass-Knex/issues"
+  },
+  "homepage": "https://github.com/obamis/Masterclass-Knex#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.21.19",
+    "pg": "^8.5.1"
+  }
+}
