@@ -2,13 +2,20 @@ const knex = require('../database')
 
 module.exports ={
   async index(req,res){
-    const results = await knex('users')
-    return res.json(results)
+    const { user_id, page = 1} = req.query
+    
+    const query = await knex('users')
+    .limit(5)
+    .offset((page - 1)*5)
+
+
+
+    return res.json(query)
   },
 
   async create(req,res,next){
     try {
-      const { username } = req.body
+      const { username,  } = req.body
 
       await knex('users').insert({username})
 
