@@ -9,7 +9,12 @@ module.exports = {
       user:'postgres',
       password:'root'
     },
-    migrations:{
+    onUpdateTrigger:table =>`CREATE TRIGGER ${table}_updated_at
+    BEFOR UPDATE ON ${table}
+    FOR EACH ROW
+    EXECUTE PROCEDURE on_update_timestamp() `
+    ,
+     migrations:{
       tableName:'KnexMigrations',
       directory:`${__dirname}/src/database/migrations`
     },
