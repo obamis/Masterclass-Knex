@@ -2,12 +2,14 @@ const knex = require('../database')
 
 module.exports ={
   async index(req,res){
-    const { user_id, page = 1} = req.query
+    // const { user_id, page = 1} = req.query
     
-    const query = await knex('users')
-    .limit(5)
-    .offset((page - 1)*5)
+    // const query = await knex('users')
+    // .limit(5)
+    // .offset((page - 1)*5)
 
+    const query = await knex('users')
+    .where('Deleted_at',null)
 
 
     return res.json(query)
@@ -45,12 +47,15 @@ module.exports ={
 
   async delete(req,res,next){ 
   try {
-    const { id } = req.params
-    await knex('users')
-    .where({ id })
-    .del()
+      const { id } = req.params
+      
+      await knex('users')
+      .where({ id })
+      .update('Deleted_at',new Date())
 
-    return res.status(200).send()
+
+      // .del()
+      return res.send()
 
   } catch (error) {
     next(error)
