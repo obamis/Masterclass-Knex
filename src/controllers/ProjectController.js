@@ -2,8 +2,27 @@ const knex = require('../database')
 
 module.exports = {
   async index(req,res,next){
-   const projects = await knex('projects')
-   return res.status(200).send(projects)
+    
+    const { user_id, page = 1 } = req.query
+    const query = knex('projects')
+    .limit(5)
+    .offset((page-1)*5)
+
+    if(user_id){
+      query
+      .where({ user_id })
+      .join('users', 'users.id', '=', 'projects.user_id')
+      .select('projects','users.username')
+      .where('users.Deleted_at',null)
+
+      .where({ user_id })
+    }
+  
+  
+    const results = await query
+   return res.status(200).json(results)
+
+
 
   },
  
@@ -41,7 +60,7 @@ module.exports = {
       const { id } = req.params
       await knex('projects')
       .where({ id })
-      .del()
+      .delete()
   
       return res.status(200).send('Post apagado')
   

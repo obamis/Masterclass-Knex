@@ -8,7 +8,10 @@ exports.up = function(knex) {
     table.integer('user_id')
     .references('users.id')
     .notNullable()
+    .onUpdate('CASCADE')
     .onDelete('CASCADE')
+    
+
 
 
     table.timestamps(true,true)
